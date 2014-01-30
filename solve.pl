@@ -105,9 +105,8 @@ sub get_row_n {
 	return $_ - 1 for grep {$idx <= (($grid_length * $_) - 1) } 1..$grid_length; }
 
 sub get_needs {
-	my %needs = map{$_=>1}1..$grid_length;
-	delete @needs{ map{$_->{n}}@{ (shift) }};
-	[keys %needs] }
+	my $nonzs = shift;
+	[ grep{ ! has($_,$nonzs) } 1..$grid_length] }
 
 sub get_zeros {
 	[grep {$_->{n} == 0} @{ (shift) }] }
